@@ -8,6 +8,11 @@ import { Router, NavigationExtras } from '@angular/router';
 })
 export class HomePage implements OnInit {
 
+  user = {
+    user_email: "ju.azocar@profesor.duoc.cl",
+    user_password: "abcd1234"
+  }
+
   myid = 56;
   customPokemon = {
     name: 'Simonimon',
@@ -19,15 +24,13 @@ export class HomePage implements OnInit {
   ngOnInit() {
   }
 
-  openWithExtras() {
+  login() {
     let navigationExtras: NavigationExtras = {
       state: {
-        id: this.myid,
-        pokemons: this.customPokemon
+        user: this.user
       }
     };
-    console.log(navigationExtras);
-    this.router.navigateByUrl('/loginpage', navigationExtras);
+    this.router.navigateByUrl('/iniciopage', navigationExtras);
   }
 
 }

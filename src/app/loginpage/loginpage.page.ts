@@ -17,10 +17,11 @@ export class LoginpagePage implements OnInit {
     this.activeroute.paramMap.subscribe(params => {
       if (navigation && navigation.extras && navigation.extras.state) {
          this.myid = JSON.stringify(navigation.extras.state);
+       //  console.log(navigation.extras.state["user"]["user_email"]);
       }else {
         this.myid = 'No se pudo obtener el estado como cadena';
       }
-      console.log(this.myid);
+      
   });
    }
 
