@@ -1,9 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Smart Backoffice
-    </ion-title>
-  </ion-toolbar>
+ 
 </ion-header>
 
 <ion-content [fullscreen]="true">
@@ -13,30 +9,30 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <ion-list>
+  <div id="container" class="center">
       <ion-list>
+        <ion-item style="color:black;">
+          <ion-img src="../../assets/img/logo_bo.png" class="center" ></ion-img>
+        </ion-item>
        <ion-item>
-        <h1>Autenticación Smart BO</h1>
+        <h1 class="center">Autenticación</h1>
        </ion-item>
         <ion-item>
-          <ion-input label="Email" type="email" placeholder="email@domain.com" [(ngModel)]="user.user_email" [value]="user.user_email" ionChange="onChangeEmail($event,data)" ></ion-input>
+          <ion-input label="Email : " type="email" placeholder="email@domain.com" [(ngModel)]="user.user_email" [value]="user.user_email" ionChange="onChangeEmail($event,data)" ></ion-input>
         </ion-item>
     
         <ion-item>
-          <ion-input label="Contraseña" type="password" [(ngModel)]="user.user_password" [value]="user.user_password" ionChange="onChangePassword($event,data)"></ion-input>
-        </ion-item>
-    
-
-        <ion-item>
-          <ion-button (click)="login()" expand="block" color="secondary">Login</ion-button>
-        </ion-item>
-        <hr/>
-        <ion-item>
-          <a href="/registerpage" >Olvidaste tu contraseña?</a>
+          <ion-input label="Contraseña : " type="password" placeholder="Ingrese su contraseña" [(ngModel)]="user.user_password" [value]="user.user_password" ionChange="onChangePassword($event,data)"></ion-input>
         </ion-item>
       </ion-list>
-    </ion-list>
+        
+      <ion-button (click)="login()" expand="full" color="primary"><ion-icon name="log-in-outline"></ion-icon> Login</ion-button>
+      
+      <ion-list>
+          <ion-item>
+            <a href="/registerpage" >Olvidaste tu contraseña?</a>
+          </ion-item>
+      </ion-list>
     
 
   </div>
