@@ -9,8 +9,8 @@ import { Router, NavigationExtras } from '@angular/router';
 export class HomePage implements OnInit {
 
   user = {
-    user_email: "ju.azocar@profesor.duoc.cl",
-    user_password: "abcd1234"
+    user_email: "",
+    user_password: ""
   }
 
   myid = 56;
@@ -25,12 +25,36 @@ export class HomePage implements OnInit {
   }
 
   login() {
+    console.log("login");
     let navigationExtras: NavigationExtras = {
       state: {
         user: this.user
       }
     };
+   // console.log(navigationExtras);
     this.router.navigateByUrl('/iniciopage', navigationExtras);
+  }
+
+  onChangeEmail(event:any,value:any){
+    console.log("change email");
+    this.user.user_email = value;
+    console.log(event.detail.data)
+    }
+
+  onChangePassword(event:any,value:any){
+    console.log("change password");
+      this.user.user_password = value;
+      console.log(event.detail.data)
+      }
+
+  setEmail(value:string) {
+    console.log("Set email");
+    this.user.user_email = value;
+  }
+
+  setPassword(value:string) {
+    console.log("Set password");
+    this.user.user_password = value;
   }
 
 }

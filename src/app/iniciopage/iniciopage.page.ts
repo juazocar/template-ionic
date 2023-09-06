@@ -21,10 +21,14 @@ export class IniciopagePage implements OnInit {
     const navigation = this.router.getCurrentNavigation();
 
     this.activeroute.paramMap.subscribe(params => {
+
       if (navigation && navigation.extras && navigation.extras.state) {
-         this.user.username =navigation.extras.state["user"]["user_email"];
+         this.user.username = navigation.extras.state["user"]["user_email"];
+         this.user.password = navigation.extras.state["user"]["user_password"];
          this.myid = JSON.stringify(navigation.extras.state);
-         //console.log();
+         console.log(this.myid);
+         console.log("(inicio) user: "+this.user.username);
+         console.log("(inicio) pass: "+this.user.password);
       }else {
         this.myid = 'No se pudo obtener el estado como cadena';
       }
@@ -33,7 +37,7 @@ export class IniciopagePage implements OnInit {
    }
 
   tituloBienvenida(){
-    return "Bienvenido "+this.user.username;
+    return "Bienvenido "+this.user.username+", Pass: "+this.user.password;
   }
 
   ngOnInit() {

@@ -20,11 +20,11 @@
         <h1>Autenticación Smart BO</h1>
        </ion-item>
         <ion-item>
-          <ion-input label="Email" type="email" placeholder="email@domain.com" [ngModel]="user.user_email"></ion-input>
+          <ion-input label="Email" type="email" placeholder="email@domain.com" [(ngModel)]="user.user_email" [value]="user.user_email" ionChange="onChangeEmail($event,data)" ></ion-input>
         </ion-item>
     
         <ion-item>
-          <ion-input label="Contraseña" type="password" [ngModel]="user.user_password"></ion-input>
+          <ion-input label="Contraseña" type="password" [(ngModel)]="user.user_password" [value]="user.user_password" ionChange="onChangePassword($event,data)"></ion-input>
         </ion-item>
     
 
