@@ -1,16 +1,25 @@
 import { Injectable } from '@angular/core';
-import { SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
+import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
+import { Platform } from '@ionic/angular';
+import { BehaviorSubject } from 'rxjs';
+import { Noticia } from './entidades/Noticia';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PersistenceserviceService {
 
-  /*tblNoticias: string = "CREATE TABLE IF NOT EXISTS noticia(id INTEGER PRYMARY KEY autoincrement, " +
+  private isDbReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
+  private listaNoticias: any = new BehaviorSubject([]);
+
+  
+  tblNoticias: string = "CREATE TABLE IF NOT EXISTS noticia(id INTEGER PRYMARY KEY autoincrement, " +
                         " titulo VARCHAR(50) NOT NULL, texto TEXT NOT NULL);";
   
-                        constructor(public database: SQLiteObject) { }
+  constructor(public platform: Platform, public database: SQLiteObject, private sqlite: SQLite) { }
 
+  
   crearBD(){
     this.platform.ready().then(() => {
       this.sqlite.create({
@@ -21,8 +30,9 @@ export class PersistenceserviceService {
       this.presentToast("BD creada");
       this.crearTablas();
     }).catch(e => this.presentToast(e));
-    }
+    })
   }
+
 
   async crearTablas() {
     try {
@@ -35,7 +45,7 @@ export class PersistenceserviceService {
     }
   }
 
-  addNoticia(titulo, texto){
+  addNoticia(titulo: string, texto: string){
     let data = [titulo, texto];
     return this.database.executeSql('INSERT INTO noticia(titulo, texto) VALUES (?, ?)', data)
     .then(()=>{
@@ -43,7 +53,7 @@ export class PersistenceserviceService {
     })
   }
 
-  updateNoticia(id, titulo, texto){
+  updateNoticia(id: number, titulo: string, texto: string){
     let data = [titulo, texto, id];
     return this.database.executeSql('UPDATE noticia SET titulo = ?, texto = ? WHERE id = ? ', data)
     .then(()=>{
@@ -51,7 +61,7 @@ export class PersistenceserviceService {
     })
   }
 
-  deleteNoticia(id){
+  deleteNoticia(id: number){
     return this.database.executeSql("DELETE FROM noticia WHERE id = ?", [id])
     .then(()=>{
       this.cargarNoticias();
@@ -74,7 +84,11 @@ export class PersistenceserviceService {
      }
      this.listaNoticias.next(items);
 
-    });
+    }); 
   }
-*/
+
+  presentToast(arg0: string) {
+    console.log(arg0);
+ }
+
 }
