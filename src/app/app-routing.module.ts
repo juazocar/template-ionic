@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { AuthGuard } from './guards/auth.guard';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
@@ -21,7 +22,8 @@ const routes: Routes = [
   },
   {
     path: 'iniciopage',
-    loadChildren: () => import('./iniciopage/iniciopage.module').then( m => m.IniciopagePageModule)
+    loadChildren: () => import('./iniciopage/iniciopage.module').then( m => m.IniciopagePageModule),
+		canLoad: [AuthGuard] // Secure all child pages
   },
   {
     path: 'configuracionpage',

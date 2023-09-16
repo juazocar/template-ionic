@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute} from '@angular/router';
+import { StorageService } from '../storageservice.service';
 
 
 @Component({
   selector: 'app-iniciopage',
   templateUrl: './iniciopage.page.html',
-  styleUrls: ['./iniciopage.page.scss'],
+  styleUrls: ['./iniciopage.page.scss']
 })
 export class IniciopagePage implements OnInit {
 
@@ -17,7 +18,9 @@ export class IniciopagePage implements OnInit {
     password: ""
    }
 
-  constructor(private activeroute: ActivatedRoute, private router: Router) {
+
+  constructor(private storage: StorageService, 
+    private activeroute: ActivatedRoute, private router: Router) {
     const navigation = this.router.getCurrentNavigation();
 
     this.activeroute.paramMap.subscribe(params => {
@@ -29,6 +32,13 @@ export class IniciopagePage implements OnInit {
          console.log(this.myid);
          console.log("(inicio) user: "+this.user.username);
          console.log("(inicio) pass: "+this.user.password);
+
+         this.storage.get('user')?.then((result) => {
+          console.log('My result', result);
+        });
+
+         //const name =  this.storage.get('usuario');
+         console.log('storage value: '+name);
       }else {
         this.myid = 'No se pudo obtener el estado como cadena';
       }
