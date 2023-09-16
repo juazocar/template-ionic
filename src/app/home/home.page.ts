@@ -19,6 +19,7 @@ export class HomePage implements OnInit {
   }
 
   constructor(
+    private router: Router
     //private local:LocalStorage,private storage: Storage, private router: Router
     ) {
    // this.local = new Storage(LocalStorage);
@@ -45,7 +46,7 @@ export class HomePage implements OnInit {
 
    
     console.log("get data: "+this.getData('usuario'));
-   // this.router.navigateByUrl('/iniciopage', navigationExtras);
+    this.router.navigateByUrl('/iniciopagealgo', navigationExtras);
   }
 
  

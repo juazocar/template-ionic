@@ -29,6 +29,11 @@ const routes: Routes = [
     path: 'configuracionpage',
     loadChildren: () => import('./configuracionpage/configuracionpage.module').then( m => m.ConfiguracionpagePageModule)
   },
+  {
+    path: '**',
+    loadChildren: () => import('./notfoundpage/notfoundpage.module').then( m => m.NotfoundpagePageModule)
+  },
+
 ];
 
 @NgModule({
