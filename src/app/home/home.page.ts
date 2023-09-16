@@ -46,7 +46,7 @@ export class HomePage implements OnInit {
 
    
     console.log("get data: "+this.getData('usuario'));
-    this.router.navigateByUrl('/iniciopagealgo', navigationExtras);
+    this.router.navigateByUrl('/iniciopage', navigationExtras);
   }
 
  

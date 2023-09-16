@@ -6,7 +6,7 @@ import { SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 })
 export class PersistenceserviceService {
 
-  tblNoticias: string = "CREATE TABLE IF NOT EXISTS noticia(id INTEGER PRYMARY KEY autoincrement, " +
+  /*tblNoticias: string = "CREATE TABLE IF NOT EXISTS noticia(id INTEGER PRYMARY KEY autoincrement, " +
                         " titulo VARCHAR(50) NOT NULL, texto TEXT NOT NULL);";
   
                         constructor(public database: SQLiteObject) { }
@@ -76,5 +76,5 @@ export class PersistenceserviceService {
 
     });
   }
-
+*/
 }
