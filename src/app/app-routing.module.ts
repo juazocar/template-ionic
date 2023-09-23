@@ -23,7 +23,7 @@ const routes: Routes = [
   {
     path: 'iniciopage',
     loadChildren: () => import('./iniciopage/iniciopage.module').then( m => m.IniciopagePageModule),
-		canLoad: [AuthGuard] // Secure all child pages
+		canActivate: [AuthGuard] // Secure all child pages
   },
   {
     path: 'configuracionpage',

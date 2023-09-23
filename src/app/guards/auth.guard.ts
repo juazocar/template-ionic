@@ -1,17 +1,12 @@
 import { Injectable } from '@angular/core';
-import { CanLoad, Route, UrlSegment, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
-
-@Injectable({
-  providedIn: 'root'
-})
-export class AuthGuard implements CanLoad {
- 
-  canLoad(
-    route: Route,
-    segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-   
-    
-    return false;
+import { CanActivate } from '@angular/router';
+import { AuthenticationService } from '../services/authentication.service';
+@Injectable()
+export class AuthGuard implements CanActivate {
+  constructor(
+    public authenticationService: AuthenticationService
+  ) { }
+  canActivate(): boolean {
+    return this.authenticationService.isAuthenticated();
   }
 }

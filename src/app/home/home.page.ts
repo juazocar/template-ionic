@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { StorageService } from '../storageservice.service';
 import { Preferences } from '@capacitor/preferences';
+import { AuthenticationService } from '../services/authentication.service';
+
 //import { Storage, LocalStorage} from 'ionic-angular';
 
 @Component({
@@ -19,6 +21,7 @@ export class HomePage implements OnInit {
   }
 
   constructor(
+    private authService: AuthenticationService,
     private router: Router
     //private local:LocalStorage,private storage: Storage, private router: Router
     ) {
@@ -35,7 +38,8 @@ export class HomePage implements OnInit {
   
 
   login() {
-    console.log("login");
+    this.authService.login(this.user.user_email);
+   /* console.log("login");
     let navigationExtras: NavigationExtras = {
       state: {
         user: this.user
@@ -46,7 +50,7 @@ export class HomePage implements OnInit {
 
    
     console.log("get data: "+this.getData('usuario'));
-    this.router.navigateByUrl('/iniciopage', navigationExtras);
+    this.router.navigateByUrl('/iniciopage', navigationExtras); */
   }
 
  
