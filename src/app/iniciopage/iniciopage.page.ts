@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute} from '@angular/router';
 import { StorageService } from '../storageservice.service';
+import { ApiService } from '../api.service';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class IniciopagePage implements OnInit {
 
 
   constructor(private storage: StorageService, 
-    private activeroute: ActivatedRoute, private router: Router) {
+    private activeroute: ActivatedRoute, private router: Router,
+    private api: ApiService) {
     const navigation = this.router.getCurrentNavigation();
 
     this.activeroute.paramMap.subscribe(params => {
@@ -48,6 +50,14 @@ export class IniciopagePage implements OnInit {
 
   tituloBienvenida(){
     return "Bienvenido "+this.user.username+", Pass: "+this.user.password;
+  }
+
+  llamarApiGet(){
+     this.api.getPosts(1).subscribe((response) => {
+        console.log(response);
+     }, (error)=>{
+       console.log(error);
+     });
   }
 
   ngOnInit() {
