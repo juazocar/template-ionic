@@ -8,6 +8,8 @@ export class ApiService {
 
   apiUrl = 'https://jsonplaceholder.typicode.com';
   
+
+  
   constructor(private http: HttpClient) { }
 
   getPosts(id:number){
