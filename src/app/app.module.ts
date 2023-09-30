@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage-angular';
 
+import { HttpClientModule} from '@angular/common/http';
 
 import { SQLite} from '@awesome-cordova-plugins/sqlite/ngx'
 import { AuthGuard } from './guards/auth.guard';
@@ -16,9 +17,9 @@ import { AuthenticationService } from './services/authentication.service';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot()],
+  imports: [HttpClientModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot()],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, SQLite, AuthGuard,
-    AuthenticationService],
+    AuthenticationService, HttpClientModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
