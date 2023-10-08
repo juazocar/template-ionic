@@ -29,14 +29,15 @@ const routes: Routes = [
     path: 'configuracionpage',
     loadChildren: () => import('./configuracionpage/configuracionpage.module').then( m => m.ConfiguracionpagePageModule)
   },
-  
   {
-    path: '**',
-    loadChildren: () => import('./notfoundpage/notfoundpage.module').then( m => m.NotfoundpagePageModule)
-  },  {
     path: 'noticiapage',
     loadChildren: () => import('./noticiapage/noticiapage.module').then( m => m.NoticiapagePageModule)
   },
+  {
+    path: '**',
+    loadChildren: () => import('./notfoundpage/notfoundpage.module').then( m => m.NotfoundpagePageModule)
+  },
+
 
   
 

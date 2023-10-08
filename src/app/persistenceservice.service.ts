@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Component } from '@angular/core';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { Platform } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
@@ -9,52 +10,63 @@ import { Noticia } from './entidades/Noticia';
 })
 export class PersistenceserviceService {
 
-  private isDbReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
+ 
 
-  private listaNoticias: any = new BehaviorSubject([]);
-  
-  
-  tblNoticias: string = "CREATE TABLE IF NOT EXISTS noticia(id INTEGER PRYMARY KEY autoincrement, " +
-                        " titulo VARCHAR(50) NOT NULL, texto TEXT NOT NULL);";
-  
-  constructor(public platform: Platform, public database: SQLiteObject, private sqlite: SQLite) { 
-    this.crearBD();
+  constructor(private sqlite: SQLite, private platform: Platform) { 
+     this.crearBD();
   }
 
   
-  crearBD(){
-    this.platform.ready().then(() => {
+  public async crearBD(){
+    await this.platform.ready();
+    try{
+   
+
       this.sqlite.create({
-        name:'noticias.db',
+        name:'data.db',
         location: 'default'
-    }).then((db: SQLiteObject) => {
-      this.database = db;
-      this.presentToast("BD creada");
-      this.crearTablas();
-    }).catch(e => this.presentToast(e));
+    }).then((db) => {
+        console.log('Database created');
+    }).catch(e => console.log('ERROR: ', e));
+  }catch(e){
+    console.error(`Error al crear la BD ${e}`);
+    console.log(this.sqlite);
+  }
+    
+  }
+
+
+  public async crearTablas() {
+    await this.platform.ready();
+    this.sqlite.create({
+      name: 'data.db',
+      location: 'default'
     })
+      .then((db) => {
+        db.executeSql("CREATE TABLE IF NOT EXISTS noticia(id INTEGER PRYMARY KEY autoincrement, " +
+        " titulo VARCHAR(50) NOT NULL, texto TEXT NOT NULL);", [])
+          .then(() => console.log('Table Created!'))
+          .catch(e => console.log(e));
+      })
+      .catch(e => console.log(e));
   }
 
-
-  async crearTablas() {
-    try {
-        await this.database.executeSql(this.tblNoticias, []);
-        this.presentToast("Tabla creada");
-        this.cargarNoticias();
-        this.isDbReady.next(true);
-    }catch(error){
-      this.presentToast("Error en Crear Tabla: "+error);
-    }
-  }
-
-  addNoticia(titulo: string, texto: string){
+ public async addNoticia(titulo: string, texto: string){
+  await this.platform.ready();
     let data = [titulo, texto];
-    return this.database.executeSql('INSERT INTO noticia(titulo, texto) VALUES (?, ?)', data)
-    .then(()=>{
-      this.cargarNoticias();
+    this.sqlite.create({
+      name: 'data.db',
+      location: 'default'
     })
+      .then((db) => {
+        db.executeSql('INSERT INTO noticia(titulo, texto) VALUES (?, ?)', data)
+          .then(() => console.log('Noticia Inserted!'))
+          .catch(e => console.log(e));
+      })
+      .catch(e => console.log(e));
   }
-
+    
+  /*
   updateNoticia(id: number, titulo: string, texto: string){
     let data = [titulo, texto, id];
     return this.database.executeSql('UPDATE noticia SET titulo = ?, texto = ? WHERE id = ? ', data)
@@ -69,7 +81,7 @@ export class PersistenceserviceService {
       this.cargarNoticias();
     })
   }
-
+ 
 
   cargarNoticias() {
     return this.database.executeSql('SELECT * FROM  noticia', [])
@@ -88,9 +100,9 @@ export class PersistenceserviceService {
 
     }); 
   }
-
+ 
   presentToast(arg0: string) {
     console.log(arg0);
- }
+ }  */
 
 }

@@ -10,4 +10,29 @@
       <ion-title size="large">noticiapage</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <div id="container" class="center">
+    <ion-list>
+     <ion-item>
+      <h1 class="center">Mantenedor de noticias</h1>
+     </ion-item>
+      <ion-item>
+        <ion-input label="Titulo : " type="text" placeholder="Titulo de la noticia..." [(ngModel)]="noticia.titulo" [value]="noticia.titulo"  ></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-input label="Contenido : " type="text" placeholder="Contenido de la noticia..." [(ngModel)]="noticia.contenido" [value]="noticia.contenido"  ></ion-input>
+      </ion-item>
+    </ion-list>
+      
+    <ion-button (click)="crearNoticia()" expand="full" color="primary"><ion-icon name="log-in-outline"></ion-icon> Crear</ion-button>
+    
+    <ion-list>
+        <ion-item>
+          <a href="/registerpage" >Olvidaste tu contraseña?</a>
+        </ion-item>
+    </ion-list>
+  
+
+</div>
 </ion-content>
