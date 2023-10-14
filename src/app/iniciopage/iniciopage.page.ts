@@ -63,7 +63,8 @@ export class IniciopagePage implements OnInit {
   }
 
   llamarApiGet(){
-     this.api.getPosts(1).subscribe((res) => {
+     this.api.getRegiones().subscribe((res) => {
+        
         console.log(res);
      }, (error)=>{
        console.log(error);

@@ -7,7 +7,7 @@ import {HttpClientModule, HttpClient, HttpHeaders} from '@angular/common/http'
 })
 export class ApiService {
 
-  apiUrl = 'https://jsonplaceholder.typicode.com';
+  apiUrl = 'http://localhost:8080';
   
  httpOptions = {
   headers : new HttpHeaders({
@@ -17,6 +17,10 @@ export class ApiService {
  }
   
   constructor(private http: HttpClient) { }
+
+  getRegiones(){
+    return this.http.get(this.apiUrl+'/region');
+  }
 
   getPosts(id:number){
     return this.http.get(this.apiUrl+'/posts/'+id);
