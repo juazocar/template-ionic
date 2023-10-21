@@ -38,7 +38,7 @@ export class HomePage implements OnInit {
   
 
   login() {
-    this.authService.login(this.user.user_email);
+    this.authService.login(this.user.user_email, this.user.user_password);
    /* console.log("login");
     let navigationExtras: NavigationExtras = {
       state: {

@@ -22,6 +22,10 @@ export class ApiService {
     return this.http.get(this.apiUrl+'/region');
   }
 
+  loginPosts(post:string){
+    return this.http.post(this.apiUrl+'/login', post, this.httpOptions);
+  }
+
   getPosts(id:number){
     return this.http.get(this.apiUrl+'/posts/'+id);
   }
